@@ -1,0 +1,41 @@
+
+
+#Task-01
+#Create a bar chart or histogram to visualize the distribution of a categorical or continuous variable, such as the distribution of ages or genders in a population.
+     
+
+#Importing Essential Libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+     
+
+data = pd.read_csv('/content/HRDataset_shiva.csv')
+data.head()
+     
+Employee_Name	EmpID	MarriedID	MaritalStatusID	GenderID	EmpStatusID	DeptID	PerfScoreID	FromDiversityJobFairID	Salary	...	ManagerName	ManagerID	RecruitmentSource	PerformanceScore	EngagementSurvey	EmpSatisfaction	SpecialProjectsCount	LastPerformanceReview_Date	DaysLateLast30	Absences
+0	Adinolfi, Wilson K	10026	0	0	1	1	5	4	0	62506	...	Michael Albert	22.0	LinkedIn	Exceeds	4.60	5	0	1/17/2019	0	1
+1	Ait Sidi, Karthikeyan	10084	1	1	1	5	3	3	0	104437	...	Simon Roup	4.0	Indeed	Fully Meets	4.96	3	6	2/24/2016	0	17
+2	Akinkuolie, Sarah	10196	1	1	0	5	5	3	0	64955	...	Kissy Sullivan	20.0	LinkedIn	Fully Meets	3.02	3	0	5/15/2012	0	3
+3	Alagbe,Trina	10088	1	1	0	1	5	3	0	64991	...	Elijiah Gray	16.0	Indeed	Fully Meets	4.84	5	0	1/3/2019	0	15
+4	Anderson, Carol	10069	0	2	0	5	5	3	0	50825	...	Webster Butler	39.0	Google Search	Fully Meets	5.00	4	0	2/1/2016	0	2
+5 rows × 36 columns
+
+
+#Plotting Bar Chart
+gender_employment_source_counts = data.groupby(['Sex', 'EmploymentStatus', 'RecruitmentSource']).size().unstack()
+
+
+fig, ax = plt.subplots(figsize=(10, 6))
+gender_employment_source_counts.plot(kind='bar', stacked=True, ax=ax)
+
+ax.set_xlabel('Gender and Employment Status')
+ax.set_ylabel('Count')
+ax.set_title('Distribution of Employment Status and Recruitment Source by Gender')
+ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+
+plt.tight_layout()
+     
+
+
+
+     
